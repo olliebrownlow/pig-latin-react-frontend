@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import TranslatorView from './TranslatorView';
-//import DictionaryView from './DictionaryView';
+import DictionaryView from './DictionaryView';
+import axios from 'axios';
 
 export class Controller extends Component {
   state = {
     step: 1,
     pigLatin: "",
-    english: ""
+    english: "",
+    info: null
   }
 
   //Handle field changes
@@ -35,10 +37,21 @@ export class Controller extends Component {
     });
   }
 
+  componentDidMount() {
+    axios.get("http://localhost:3001/terminologies")
+    .then(response => response.data)
+    .then((data) => {
+      this.setState({info: data.translations});
+      // console.log(this.state.info);
+    }).catch(error => {
+      console.log('check error', error);
+    });
+  }
+
   render() {
     const { step } = this.state;
-    const { pigLatin, english } = this.state;
-    const values = { pigLatin, english };
+    const { pigLatin, english, info } = this.state;
+    const values = { pigLatin, english, info };
 
     switch(step) {
       case 1:
@@ -51,13 +64,12 @@ export class Controller extends Component {
         />
       );
       case 2:
-      return <h1>DictionaryView</h1>
-      // return (
-      //   <DictionaryView
-      //     prevStep={this.nextStep}
-      //     values={values}
-      //   />
-      // );
+      return (
+        <DictionaryView
+          prevStep={this.prevStep}
+          values={values}
+        />
+      );
     }
   }
 }

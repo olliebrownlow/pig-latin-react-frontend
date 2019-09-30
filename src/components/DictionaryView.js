@@ -2,27 +2,43 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import MaterialTable from 'material-table';
 
 export class DictionaryView extends Component {
+  state = {
+    columns: [
+        { title: 'English', field: 'english' },
+        { title: 'Pig Latin', field: 'pig_latin', initialEditValue: 'initial edit value' },
+      ]
+      // ,
+      // data: [
+      //   { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
+      //   { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34 },
+      // ]
+  }
+
+  seeTranslator = e => {
+    e.preventDefault();
+    this.props.prevStep();
+  }
 
   render() {
+    const { values } = this.props;
+    console.log(values.info)
     return (
       <React.Fragment>
         <AppBar
           style={styles.appBar}
-          position="static"
+          position="sticky"
         >
           <Typography variant="h4">
-            English to Pig Latin Translator
+            English/Pig Latin Dictionary
           </Typography>
           <Typography variant="h5">
-            (Englishay otay Igpay Atinlay Anslatortray)
+            (Englishay/Igpay Atinlay Ictionaryday)
           </Typography>
         </AppBar>
         <br/>
@@ -30,40 +46,56 @@ export class DictionaryView extends Component {
         <Card style={styles.card} >
         <br/>
           <Chip
-            label="Dictionary"
-            onClick={this.seeAll}
+            label="Translator"
+            onClick={this.seeTranslator}
             clickable
           />
           <br/>
-          <form onSubmit={this.handleSubmit}>
-          <TextField
-            label="Enter text"
-            placeholder="e.g., risk assessment"
-            margin="normal"
-            style={styles.textField}
-            onChange={this.handleChange}
-            defaultValue={english}
-          />
-          <br/>
           <CardContent>
-            <Typography style={styles.title} color="textSecondary" gutterBottom>
-              Pig Latin:
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {this.state.pigLatin}
-            </Typography>
+
+          <MaterialTable
+              title="Dictionary"
+              columns={this.state.columns}
+              data={values.info}
+              editable={{
+                onRowAdd: newData =>
+                  new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                      {
+                        const data = values.info;
+                        data.push(newData);
+                        this.setState({ data }, () => resolve());
+                      }
+                      resolve()
+                    }, 1000)
+                  }),
+                onRowUpdate: (newData, oldData) =>
+                  new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                      {
+                        const data = values.info;
+                        const index = data.indexOf(oldData);
+                        data[index] = newData;
+                        this.setState({ data }, () => resolve());
+                      }
+                      resolve()
+                    }, 1000)
+                  }),
+                onRowDelete: oldData =>
+                  new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                      {
+                        let data = values.info;
+                        const index = data.indexOf(oldData);
+                        data.splice(index, 1);
+                        this.setState({ data }, () => resolve());
+                      }
+                      resolve()
+                    }, 1000)
+                  }),
+              }}
+            />
           </CardContent>
-          <CardActions>
-            <Button
-              type="submit"
-              size="small"
-              variant="contained"
-              style={styles.button}
-            >
-            Submit
-            </Button>
-          </CardActions>
-          </form>
         </Card>
       </React.Fragment>
     );
@@ -74,17 +106,6 @@ const styles = {
   card: {
     width: 750,
     justify: 'center'
-  },
-  title: {
-    fontSize: 14
-  },
-  button: {
-    backgroundColor: '#ffe300',
-    color: '#031121',
-    width: 150
-  },
-  textField: {
-    width: 250
   },
   appBar: {
     background: '#ffe300',

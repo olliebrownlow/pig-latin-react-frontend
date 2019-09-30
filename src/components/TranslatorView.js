@@ -10,19 +10,18 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
 export class TranslatorView extends Component {
-  
+
   seeAll = e => {
     e.preventDefault();
     this.props.nextStep();
   }
 
-  handleSubmit = (e) => {
+  getTranslation = (e) => {
     const { values, handleState } = this.props;
-    console.log(values.english)
     axios.post("http://localhost:3001/terminologies", { "english": values.english })
     .then(response => response.data)
     .then((data) => {
-      console.log('data', data.terminology.pig_latin);
+      console.log('data', data);
       handleState (data.terminology.pig_latin);
     }).catch(error => {
       console.log('check error', error);
@@ -55,7 +54,7 @@ export class TranslatorView extends Component {
             clickable
           />
           <br/>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.getTranslation}>
           <TextField
             label="Enter text"
             placeholder="e.g., risk assessment"

@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #031121;
+  height: 800px;
 }
 
 .App-logo {
@@ -19,4 +21,38 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.MuiTypography-root.MuiTypography-h4 {
+  color: #031121;
+}
+
+.MuiTypography-root.MuiTypography-h5 {
+  color: #031121;
+}
+
+.MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated {
+  color: #031121;
+}
+
+.MuiChip-label {
+  color: #031121;
+  font-size: 0.95rem;
+}
+
+.MuiChip-root.MuiChip-clickable {
+  background-color: #ffe300;
+}
+
+.MuiCard-root {
+  margin: auto;
+}
+
+.MuiCardActions-root {
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.MuiChip-root.MuiChip-clickable {
+  margin-left: 600px;
 }

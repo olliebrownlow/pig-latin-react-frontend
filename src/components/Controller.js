@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import TranslatorView from './TranslatorView';
-//import DictionaryView from 'DictionaryView';
+//import DictionaryView from './DictionaryView';
 
 export class Controller extends Component {
   state = {
     step: 1,
-    terminology: ""
+    pigLatin: "",
+    english: ""
+  }
+
+  //Handle field changes
+  handleChange = input => e => {
+    this.setState({[input]: e.target.value});
+  }
+
+  //Handle state changes
+  handleState = (data) => {
+    this.setState({pigLatin: data});
   }
 
   // proceed to next step
@@ -24,27 +35,29 @@ export class Controller extends Component {
     });
   }
 
-  // handle fields change
-  handleChange = input => e => {
-    this.setState({[input]: e.target.value});
-  }
-
   render() {
     const { step } = this.state;
-    const { terminology } = this.state;
-    const value = { terminology }
+    const { pigLatin, english } = this.state;
+    const values = { pigLatin, english };
 
     switch(step) {
       case 1:
       return (
         <TranslatorView
-          handleChange={this.handleChange}
           nextStep={this.nextStep}
-          value={value}
+          values={values}
+          handleChange={this.handleChange}
+          handleState={this.handleState}
         />
       );
       case 2:
       return <h1>DictionaryView</h1>
+      // return (
+      //   <DictionaryView
+      //     prevStep={this.nextStep}
+      //     values={values}
+      //   />
+      // );
     }
   }
 }

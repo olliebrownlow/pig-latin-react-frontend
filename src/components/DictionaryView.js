@@ -10,14 +10,18 @@ import MaterialTable from 'material-table';
 export class DictionaryView extends Component {
   state = {
     columns: [
-        { title: 'English', field: 'english' },
-        { title: 'Pig Latin', field: 'pig_latin', initialEditValue: 'initial edit value' },
-      ]
-      // ,
-      // data: [
-      //   { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-      //   { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34 },
-      // ]
+      { title: 'English', field: 'english' },
+      { title: 'Pig Latin', field: 'pig_latin', initialEditValue: 'initial edit value' },
+    ]
+  }
+
+  handleDelete(id) {
+    axios.delete(`http://localhost:3001/terminologies/${id}`)
+    .then(response => {
+      this.props.componentDidMount();
+    }).catch(error => {
+      console.log('logout error', error);
+    });
   }
 
   seeTranslator = e => {
@@ -54,27 +58,38 @@ export class DictionaryView extends Component {
           <CardContent>
 
           <MaterialTable
-              title="Dictionary"
-              columns={this.state.columns}
-              data={values.info}
+            localization={{
+               body: {
+                 emptyDataSourceMessage: 'No data to show!'
+               },
+               toolbar: {
+                 searchTooltip: 'Lêgerîn'
+               },
+               pagination: {
+                 labelRowsSelect: '',
+                 labelDisplayedRows: '{from}-{to} of {count}',
+                 labelRowsPerPage: '',
+                 firstTooltip: 'Rûpele Berîn',
+                 previousTooltip: 'Rûpele Berê',
+                 nextTooltip: 'Rûpele Piştî',
+                 lastTooltip: 'Rûpele Talî'
+               }
+             }}
+             options={{
+               pageSize: 7,
+               pageSizeOptions: []
+             }}
+            title="Dictionary"
+            columns={this.state.columns}
+            data={values.info}
               editable={{
-                onRowAdd: newData =>
-                  new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                      {
-                        const data = values.info;
-                        data.push(newData);
-                        this.setState({ data }, () => resolve());
-                      }
-                      resolve()
-                    }, 1000)
-                  }),
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve, reject) => {
                     setTimeout(() => {
                       {
                         const data = values.info;
                         const index = data.indexOf(oldData);
+                        const id = data[index].id
                         data[index] = newData;
                         this.setState({ data }, () => resolve());
                       }
@@ -87,12 +102,14 @@ export class DictionaryView extends Component {
                       {
                         let data = values.info;
                         const index = data.indexOf(oldData);
+                        const id = data[index].id
                         data.splice(index, 1);
+                        this.handleDelete(id);
                         this.setState({ data }, () => resolve());
                       }
-                      resolve()
-                    }, 1000)
-                  }),
+                    resolve()
+                  }, 1000)
+                }),
               }}
             />
           </CardContent>

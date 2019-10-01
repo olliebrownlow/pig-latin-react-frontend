@@ -37,12 +37,12 @@ export class Controller extends Component {
     });
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     axios.get("http://localhost:3001/terminologies")
     .then(response => response.data)
     .then((data) => {
       this.setState({info: data.translations});
-      // console.log(this.state.info);
+      console.log(this.state.info);
     }).catch(error => {
       console.log('check error', error);
     });
@@ -61,6 +61,7 @@ export class Controller extends Component {
           values={values}
           handleChange={this.handleChange}
           handleState={this.handleState}
+          componentDidMount={this.componentDidMount}
         />
       );
       case 2:
@@ -68,6 +69,7 @@ export class Controller extends Component {
         <DictionaryView
           prevStep={this.prevStep}
           values={values}
+          componentDidMount={this.componentDidMount}
         />
       );
     }

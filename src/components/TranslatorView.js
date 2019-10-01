@@ -30,7 +30,7 @@ export class TranslatorView extends Component {
   }
 
   render() {
-    const { values, handleChange } = this.props;
+    const { values, handleChange, componentDidMount } = this.props;
     return (
       <React.Fragment>
         <AppBar
@@ -50,11 +50,17 @@ export class TranslatorView extends Component {
         <br/>
           <Chip
             label="Dictionary"
-            onClick={this.seeAll}
+            onClick={ (e) => {
+                this.seeAll(e);
+                componentDidMount();
+              }}
             clickable
           />
           <br/>
-          <form onSubmit={this.getTranslation}>
+          <form onSubmit={(e) => {
+              this.getTranslation(e);
+              componentDidMount();
+            }}>
           <TextField
             label="Enter text"
             placeholder="e.g., risk assessment"

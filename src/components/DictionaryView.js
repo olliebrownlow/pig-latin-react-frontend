@@ -11,12 +11,22 @@ export class DictionaryView extends Component {
   state = {
     columns: [
       { title: 'English', field: 'english' },
-      { title: 'Pig Latin', field: 'pig_latin', initialEditValue: 'initial edit value' },
+      { title: 'Pig Latin', field: 'pig_latin', editable: 'never' }
     ]
   }
 
   handleDelete(id) {
     axios.delete(`http://localhost:3001/terminologies/${id}`)
+    .then(response => {
+      this.props.componentDidMount();
+    }).catch(error => {
+      console.log('logout error', error);
+    });
+  }
+
+  handleEdit(id, data) {
+    const { values } = this.props;
+    axios.patch(`http://localhost:3001/terminologies/${id}`, { "english": data })
     .then(response => {
       this.props.componentDidMount();
     }).catch(error => {
@@ -31,7 +41,6 @@ export class DictionaryView extends Component {
 
   render() {
     const { values } = this.props;
-    console.log(values.info)
     return (
       <React.Fragment>
         <AppBar
@@ -39,10 +48,13 @@ export class DictionaryView extends Component {
           position="sticky"
         >
           <Typography variant="h4">
-            English/Pig Latin Dictionary
+            English/Pig Latin Translations
           </Typography>
-          <Typography variant="h5">
-            (Englishay/Igpay Atinlay Ictionaryday)
+          <Typography variant="h6">
+            (Englishay/Igpay Atinlay anslationstray)
+          </Typography>
+          <Typography variant="h6">
+            For the Health & Safety Industry
           </Typography>
         </AppBar>
         <br/>
@@ -60,26 +72,24 @@ export class DictionaryView extends Component {
           <MaterialTable
             localization={{
                body: {
-                 emptyDataSourceMessage: 'No data to show!'
+                 emptyDataSourceMessage: 'No data: please translate something first.'
                },
                toolbar: {
-                 searchTooltip: 'Lêgerîn'
+                 searchTooltip: 'Search'
                },
                pagination: {
-                 labelRowsSelect: '',
                  labelDisplayedRows: '{from}-{to} of {count}',
-                 labelRowsPerPage: '',
-                 firstTooltip: 'Rûpele Berîn',
-                 previousTooltip: 'Rûpele Berê',
-                 nextTooltip: 'Rûpele Piştî',
-                 lastTooltip: 'Rûpele Talî'
+                 firstTooltip: 'First page',
+                 previousTooltip: 'Previous page',
+                 nextTooltip: 'Next page',
+                 lastTooltip: 'Last Page'
                }
              }}
              options={{
-               pageSize: 7,
-               pageSizeOptions: []
+               pageSize: 5,
+               pageSizeOptions: [5, 10, 20, 50]
              }}
-            title="Dictionary"
+            title="Translation history"
             columns={this.state.columns}
             data={values.info}
               editable={{
@@ -87,11 +97,12 @@ export class DictionaryView extends Component {
                   new Promise((resolve, reject) => {
                     setTimeout(() => {
                       {
-                        const data = values.info;
+                        let data = values.info;
                         const index = data.indexOf(oldData);
                         const id = data[index].id
                         data[index] = newData;
-                        this.setState({ data }, () => resolve());
+                        this.setState({ data });
+                        this.handleEdit(id, newData.english, () => resolve());
                       }
                       resolve()
                     }, 1000)

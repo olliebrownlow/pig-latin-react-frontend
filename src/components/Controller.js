@@ -42,7 +42,6 @@ export class Controller extends Component {
     .then(response => response.data)
     .then((data) => {
       this.setState({info: data.translations});
-      console.log(this.state.info);
     }).catch(error => {
       console.log('check error', error);
     });

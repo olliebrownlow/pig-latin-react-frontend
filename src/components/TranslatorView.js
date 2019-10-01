@@ -8,8 +8,21 @@ import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
 export class TranslatorView extends Component {
+
+  state = {
+    snackbaropen: false,
+    snackbarmsg: "Please enter text to translate"
+  }
+
+  snackbarClose = e => {
+    this.setState({
+      snackbaropen: false
+    });
+  }
 
   seeAll = e => {
     e.preventDefault();
@@ -21,7 +34,6 @@ export class TranslatorView extends Component {
     axios.post("http://localhost:3001/terminologies", { "english": values.english })
     .then(response => response.data)
     .then((data) => {
-      console.log('data', data);
       handleState (data.terminology.pig_latin);
     }).catch(error => {
       console.log('check error', error);
@@ -40,8 +52,11 @@ export class TranslatorView extends Component {
           <Typography variant="h4">
             English to Pig Latin Translator
           </Typography>
-          <Typography variant="h5">
+          <Typography variant="h6">
             (Englishay otay Igpay Atinlay Anslatortray)
+          </Typography>
+          <Typography variant="h6">
+            For the Health & Safety Industry
           </Typography>
         </AppBar>
         <br/>
@@ -58,8 +73,13 @@ export class TranslatorView extends Component {
           />
           <br/>
           <form onSubmit={(e) => {
+            if (values.english !== "") {
               this.getTranslation(e);
               componentDidMount();
+            } else {
+              this.setState({ snackbaropen: true })
+            }
+            e.preventDefault();
             }}>
           <TextField
             label="Enter text"
@@ -68,6 +88,23 @@ export class TranslatorView extends Component {
             style={styles.textField}
             onChange={handleChange('english')}
             defaultValue={values.english}
+          />
+          <Snackbar
+            anchorOrigin={{vertical: "top", horizontal: "center"}}
+            open={this.state.snackbaropen}
+            autoHideDuration={2000}
+            onClose={this.snackbarClose}
+            message={<span>{this.state.snackbarmsg}</span>}
+            action={[
+              <IconButton
+                key="close"
+                aria-label="close"
+                color="inherit"
+                onClick={this.snackbarClose}
+              >
+              x
+              </IconButton>
+            ]}
           />
           <br/>
           <CardContent>

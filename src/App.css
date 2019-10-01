@@ -1,7 +1,10 @@
+body {
+  background-color: #031121;
+  padding-bottom: 50px;
+}
+
 .App {
   text-align: center;
-  background-color: #031121;
-  height: 800px;
 }
 
 .App-logo {
@@ -31,6 +34,10 @@
   color: #031121;
 }
 
+.MuiTypography-root.MuiTypography-h6 {
+  color: #031121;
+}
+
 .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated {
   color: #031121;
 }
@@ -55,4 +62,8 @@
 
 .MuiChip-root.MuiChip-clickable {
   margin-left: 600px;
+}
+
+.MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
+  box-shadow: none;
 }

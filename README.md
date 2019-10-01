@@ -1,68 +1,89 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# English to Pig Latin translation service (frontend)
 
-## Available Scripts
+Single-page, web app with CRUD functionality created using a React.js frontend and [rails backend](https://github.com/olliebrownlow/pig-latin-rails-backend). On the translator view the app allows a user to translate into Pig Latin any phrase they wish. A button takes the user to a history of their translations where they can delete and update individual entries as well as sort and search through them.
 
-In the project directory, you can run:
+### Getting started
 
-### `npm start`
+Clone the repo, navigate to the root directory and run `npm install` to install the dependencies. Run `npm start` to start it in development mode (localhost:3000). The rails backend needs to be started on a different port.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The backend is available [here](https://github.com/olliebrownlow/pig-latin-rails-backend) and needs setting up first.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Tech stack
 
-### `npm test`
+- Ruby on Rails 6.0.0
+- React.js 16.10.1
+- PostgreSQL 10
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Page design
 
-### `npm run build`
+For this I have used material-ui with styling tweaks here and there, as well as material-table for the historical list of translations.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Code design
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+The interactive components are accessed through a wrapper component (Controller.js) which has a `step` counter which renders the correct 'page' depending on user navigation.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Requests to the rails backend server are made using axios and interact with a PostgreSQL database.
 
-### `npm run eject`
+Most state is saved to the parent component for easy access from the child components. Some more "local" state is kept in the child components - snackbar alerts and table column naming information.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+As a user inputs a term to translate, the term is saved to state in the parent component. On clicking "submit" (see [edge cases section](#edge-cases) for when user leaves the text field empty or uses non-letter characters), a post request is made and the response is filtered for the translation which is displayed. The input field's entry is preserved even when navigating away for a better UX.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The translation history page displays all records held in the database. PUT and DELETE requests are made from here via the action icons, and there is a button for returning to the translator page.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### User stories
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+As a user,
+so I can produce documents in Pig Latin,
+I want to be able to translate English terminology into Pig Latin.
+```
+```
+As a user,
+to avoid repeatedly translating the same terminology,
+I want to be able to see all of my translated terminology.
+```
+```
+As a user,
+so as not to clutter the page showing my translation history,
+I don't want to be able to save one term multiple times or in multiple forms.
+```
+#### Extra user stories
+```
+As a user,
+in case I no longer need outdated terminology,
+I want to be able to delete any translated terminology I have saved.
+```
+```
+As a user,
+in case I save an incorrect term,
+I want to be able to update any terminology I have saved.
+```
+```
+As a user,
+in order to quickly locate a particular term,
+I want to be able to search through my saved terminology.
+```
 
-## Learn More
+### Edge cases
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- If the user leaves the textfield blank and clicks "submit" a snackbar message pops up asking the user to enter text.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- If the user inputs any characters that are not lower-case letters, they are ignored by the `handleChange()` method with only the lower-case letters saved to state and ready for translation.
 
-### Code Splitting
+### Unresolved edge case
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- I have not dealt with cases where, when updating from the table in the translation history view, the user inputs non-lower-case letters, numbers and other characters not in the alphabet.
 
-### Analyzing the Bundle Size
+### Screenshots
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Translation page
+![github1](./public/translationpage.PNG)
 
-### Making a Progressive Web App
+Translation history page
+![github2](./public/translationhistorypage.PNG)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+Delete function
+![github3](./public/deletefunction.PNG)
 
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Update function
+![github4](./public/updatingfunction.PNG)

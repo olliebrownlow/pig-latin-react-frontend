@@ -8,12 +8,12 @@ export class Controller extends Component {
     step: 1,
     pigLatin: "",
     english: "",
-    info: null
+    allTranslations: null
   }
 
   //Handle field changes
   handleChange = input => e => {
-    this.setState({[input]: e.target.value});
+    this.setState({[input]: (e.target.value).toLowerCase().replace(/[^a-z\s]/ig, "")});
   }
 
   //Handle state changes
@@ -41,7 +41,7 @@ export class Controller extends Component {
     axios.get("http://localhost:3001/terminologies")
     .then(response => response.data)
     .then((data) => {
-      this.setState({info: data.translations});
+      this.setState({allTranslations: data.translations});
     }).catch(error => {
       console.log('check error', error);
     });
@@ -49,8 +49,8 @@ export class Controller extends Component {
 
   render() {
     const { step } = this.state;
-    const { pigLatin, english, info } = this.state;
-    const values = { pigLatin, english, info };
+    const { pigLatin, english, allTranslations } = this.state;
+    const values = { pigLatin, english, allTranslations };
 
     switch(step) {
       case 1:

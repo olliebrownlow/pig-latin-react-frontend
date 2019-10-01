@@ -64,7 +64,7 @@ export class TranslatorView extends Component {
         <Card style={styles.card} >
         <br/>
           <Chip
-            label="Dictionary"
+            label="Translation History"
             onClick={ (e) => {
                 this.seeAll(e);
                 componentDidMount();

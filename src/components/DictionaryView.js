@@ -25,8 +25,7 @@ export class DictionaryView extends Component {
   }
 
   handleEdit(id, data) {
-    const { values } = this.props;
-    axios.patch(`http://localhost:3001/terminologies/${id}`, { "english": data })
+    axios.put(`http://localhost:3001/terminologies/${id}`, { "english": data })
     .then(response => {
       this.props.componentDidMount();
     }).catch(error => {
@@ -91,13 +90,13 @@ export class DictionaryView extends Component {
              }}
             title="Translation history"
             columns={this.state.columns}
-            data={values.info}
+            data={values.allTranslations}
               editable={{
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve, reject) => {
                     setTimeout(() => {
                       {
-                        let data = values.info;
+                        let data = values.allTranslations;
                         const index = data.indexOf(oldData);
                         const id = data[index].id
                         data[index] = newData;
@@ -111,7 +110,7 @@ export class DictionaryView extends Component {
                   new Promise((resolve, reject) => {
                     setTimeout(() => {
                       {
-                        let data = values.info;
+                        let data = values.allTranslations;
                         const index = data.indexOf(oldData);
                         const id = data[index].id
                         data.splice(index, 1);

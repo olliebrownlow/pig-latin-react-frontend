@@ -66,9 +66,11 @@ I want to be able to search through my saved terminology.
 
 ### Edge cases
 
-- If the user leaves the textfield blank and clicks "submit" a snackbar message pops up asking the user to enter text.
+- If the user leaves the TranslatorView textfield blank and clicks "submit" a snackbar message pops up asking the user to enter text.
 
 - If the user inputs any characters that are not lower-case letters, they are ignored by the `handleChange()` method with only the lower-case letters saved to state and ready for translation.
+
+- If the user leaves the DictionaryView edit field blank and clicks the "save" tick, a snackbar message pops up informing the user that the field cannot be left empty.
 
 - If the user inputs any characters that are not lower-case letters, they are filtered out by the `handleEdit()` method with only the lower-case letters pushed to the back end.
 

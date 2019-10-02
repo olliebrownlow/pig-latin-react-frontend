@@ -6,13 +6,23 @@ import Chip from '@material-ui/core/Chip';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import MaterialTable from 'material-table';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
 export class DictionaryView extends Component {
   state = {
+    snackbaropen: false,
+    snackbarmsg: "Sorry: this field cannot be left blank!",
     columns: [
       { title: 'English', field: 'english' },
       { title: 'Pig Latin', field: 'pig_latin', editable: 'never' }
     ]
+  }
+
+  snackbarClose = e => {
+    this.setState({
+      snackbaropen: false
+    });
   }
 
   handleDelete(id) {
@@ -67,7 +77,23 @@ export class DictionaryView extends Component {
           />
           <br/>
           <CardContent>
-
+          <Snackbar
+            anchorOrigin={{vertical: "top", horizontal: "center"}}
+            open={this.state.snackbaropen}
+            autoHideDuration={2000}
+            onClose={this.snackbarClose}
+            message={<span>{this.state.snackbarmsg}</span>}
+            action={[
+              <IconButton
+                key="close"
+                aria-label="close"
+                color="inherit"
+                onClick={this.snackbarClose}
+              >
+              x
+              </IconButton>
+            ]}
+          />
           <MaterialTable
             localization={{
                body: {
@@ -95,13 +121,17 @@ export class DictionaryView extends Component {
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve, reject) => {
                     setTimeout(() => {
-                      {
-                        let data = values.allTranslations;
-                        const index = data.indexOf(oldData);
-                        const id = data[index].id
-                        data[index] = newData;
-                        this.setState({ data });
-                        this.handleEdit(id, newData.english, () => resolve());
+                      if (newData.english !== "") {
+                        {
+                          let data = values.allTranslations;
+                          const index = data.indexOf(oldData);
+                          const id = data[index].id
+                          data[index] = newData;
+                          this.setState({ data });
+                          this.handleEdit(id, newData.english, () => resolve());
+                        }
+                      } else {
+                        this.setState({ snackbaropen: true })
                       }
                       resolve()
                     }, 1000)

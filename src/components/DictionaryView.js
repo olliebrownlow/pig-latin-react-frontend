@@ -30,7 +30,7 @@ export class DictionaryView extends Component {
     .then(response => {
       this.props.componentDidMount();
     }).catch(error => {
-      console.log('logout error', error);
+      console.log('delete error', error);
     });
   }
 
@@ -39,7 +39,7 @@ export class DictionaryView extends Component {
     .then(response => {
       this.props.componentDidMount();
     }).catch(error => {
-      console.log('logout error', error);
+      console.log('edit error', error);
     });
   }
 
@@ -48,7 +48,6 @@ export class DictionaryView extends Component {
     this.props.prevStep();
   }
 
-  // TODO lift to parent component
   allEnglishValues = () => {
     const { values } = this.props;
     let phrases = [];

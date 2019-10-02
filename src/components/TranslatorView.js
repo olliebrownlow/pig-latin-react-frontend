@@ -24,7 +24,7 @@ export class TranslatorView extends Component {
     });
   }
 
-  seeAll = e => {
+  seeTranslationHistory = e => {
     e.preventDefault();
     this.props.nextStep();
   }
@@ -36,7 +36,7 @@ export class TranslatorView extends Component {
     .then((data) => {
       handleState (data.terminology.pig_latin);
     }).catch(error => {
-      console.log('check error', error);
+      console.log('getting a translation error', error);
     });
     e.preventDefault();
   }
@@ -66,7 +66,7 @@ export class TranslatorView extends Component {
           <Chip
             label="Translation History"
             onClick={ (e) => {
-                this.seeAll(e);
+                this.seeTranslationHistory(e);
                 componentDidMount();
               }}
             clickable

@@ -43,7 +43,7 @@ export class Controller extends Component {
     .then((data) => {
       this.setState({allTranslations: data.translations});
     }).catch(error => {
-      console.log('check error', error);
+      console.log('getting all translations error', error);
     });
   }
 

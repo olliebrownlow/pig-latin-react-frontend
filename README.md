@@ -70,9 +70,7 @@ I want to be able to search through my saved terminology.
 
 - If the user inputs any characters that are not lower-case letters, they are ignored by the `handleChange()` method with only the lower-case letters saved to state and ready for translation.
 
-### Unresolved edge case
-
-- I have not dealt with cases where, when updating from the table in the translation history view, the user inputs non-lower-case letters, numbers and other characters not in the alphabet.
+- If the user inputs any characters that are not lower-case letters, they are filtered out by the `handleEdit()` method with only the lower-case letters pushed to the back end.
 
 ### Screenshots
 

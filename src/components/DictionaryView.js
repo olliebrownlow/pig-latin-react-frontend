@@ -25,7 +25,7 @@ export class DictionaryView extends Component {
   }
 
   handleEdit(id, data) {
-    axios.put(`http://localhost:3001/terminologies/${id}`, { "english": data })
+    axios.put(`http://localhost:3001/terminologies/${id}`, { "english": data.toLowerCase().replace(/[^a-z\s]/ig, "") })
     .then(response => {
       this.props.componentDidMount();
     }).catch(error => {

@@ -75,7 +75,6 @@ export class TranslatorView extends Component {
           <form onSubmit={(e) => {
             if (values.english !== "") {
               this.getTranslation(e);
-              componentDidMount();
             } else {
               this.setState({ snackbaropen: true })
             }

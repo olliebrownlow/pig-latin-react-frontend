@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 export class DictionaryView extends Component {
   state = {
     snackbaropen: false,
-    snackbarmsg: "Sorry: this field cannot be left blank!",
+    snackbarmsg: "Not translated! Either you left the field blank or the phrase is already in the history. Try searching for it.",
     columns: [
       { title: 'English', field: 'english' },
       { title: 'Pig Latin', field: 'pig_latin', editable: 'never' }
@@ -48,6 +48,16 @@ export class DictionaryView extends Component {
     this.props.prevStep();
   }
 
+  // TODO lift to parent component
+  allEnglishValues = () => {
+    const { values } = this.props;
+    let phrases = [];
+    values.allTranslations.forEach(function(translation) {
+      phrases.push(translation.english);
+    });
+    return phrases;
+  }
+
   render() {
     const { values } = this.props;
     return (
@@ -80,7 +90,7 @@ export class DictionaryView extends Component {
           <Snackbar
             anchorOrigin={{vertical: "top", horizontal: "center"}}
             open={this.state.snackbaropen}
-            autoHideDuration={2000}
+            autoHideDuration={5000}
             onClose={this.snackbarClose}
             message={<span>{this.state.snackbarmsg}</span>}
             action={[
@@ -120,8 +130,9 @@ export class DictionaryView extends Component {
               editable={{
                 onRowUpdate: (newData, oldData) =>
                   new Promise((resolve, reject) => {
+                    const listOfPhrases = this.allEnglishValues();
                     setTimeout(() => {
-                      if (newData.english !== "") {
+                      if (newData.english !== ""&& !listOfPhrases.includes(newData.english)) {
                         {
                           let data = values.allTranslations;
                           const index = data.indexOf(oldData);

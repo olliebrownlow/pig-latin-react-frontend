@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/olliebrownlow/pig-latin-react-frontend.svg?style=shield)](https://circleci.com/gh/olliebrownlow/pig-latin-react-frontend)
+
 # English to Pig Latin translation service (frontend)
 
 Single-page, web app with CRUD functionality created using a React.js frontend and [rails backend](https://github.com/olliebrownlow/pig-latin-rails-backend). On the translator view the app allows a user to translate into Pig Latin any phrase they wish. A button takes the user to a history of their translations where they can delete and update individual entries as well as sort and search through them.
@@ -37,27 +39,33 @@ As a user,
 so I can produce documents in Pig Latin,
 I want to be able to translate English terminology into Pig Latin.
 ```
+
 ```
 As a user,
 to avoid repeatedly translating the same terminology,
 I want to be able to see all of my translated terminology.
 ```
+
 ```
 As a user,
 so as not to clutter the page showing my translation history,
 I don't want to be able to save one term multiple times or in multiple forms.
 ```
+
 #### Extra user stories
+
 ```
 As a user,
 in case I no longer need outdated terminology,
 I want to be able to delete any translated terminology I have saved.
 ```
+
 ```
 As a user,
 in case I save an incorrect term,
 I want to be able to update any terminology I have saved.
 ```
+
 ```
 As a user,
 in order to quickly locate a particular term,
@@ -73,6 +81,7 @@ I want to be able to search through my saved terminology.
 - If the user inputs any characters that are not lower-case letters, they are ignored by the `handleChange()` method with only the lower-case letters saved to state and ready for translation.
 
 ## Editing old Translations
+
 - If the user leaves the DictionaryView edit field blank and clicks the "save" tick, a snackbar message pops up informing the user that the field cannot be left empty.
 
 - If the user inputs any characters that are not lower-case letters, they are filtered out by the `handleEdit()` method with only the lower-case letters pushed to the back end.

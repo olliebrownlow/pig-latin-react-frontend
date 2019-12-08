@@ -1,6 +1,4 @@
 const baseUrl =
-  process.env.NODE_ENV === "production"
-    ? "https://piglatin-dictionary.herokuapp.com"
-    : "http://localhost:3001";
+  process.env.NODE_ENV === "https://piglatin-dictionary.herokuapp.com";
 
 export default baseUrl;

@@ -53,7 +53,6 @@ export class TranslatorView extends Component {
           <Typography variant="h6">
             (Englishay otay Igpay Atinlay Anslatortray)
           </Typography>
-          <Typography variant="h6">For the Health & Safety Industry</Typography>
         </AppBar>
         <br />
         <br />

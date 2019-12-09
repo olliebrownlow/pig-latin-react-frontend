@@ -76,7 +76,6 @@ export class DictionaryView extends Component {
           <Typography variant="h6">
             (Englishay/Igpay Atinlay anslationstray)
           </Typography>
-          <Typography variant="h6">For the Health & Safety Industry</Typography>
         </AppBar>
         <br />
         <br />

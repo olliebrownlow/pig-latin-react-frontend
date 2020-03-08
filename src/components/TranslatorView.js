@@ -121,6 +121,7 @@ export class TranslatorView extends Component {
                 size="small"
                 variant="contained"
                 style={styles.button}
+                data-testid="translateButton"
               >
                 Submit
               </Button>

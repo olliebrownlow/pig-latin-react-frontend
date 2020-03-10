@@ -6,8 +6,13 @@ import TranslatorView from "../components/TranslatorView";
 describe("TranslatorView", () => {
   afterEach(cleanup);
 
-  test.skip("Calls the onSubmit function when submit is clicked", () => {
-    const { getByTestId } = render(<TranslatorView onSubmit={jest.fn()} />);
+  test("Calls the onSubmit function when submit is clicked", () => {
+    var values = {};
+    values[0] = "risk";
+
+    const { getByTestId } = render(
+      <TranslatorView handleChange={jest.fn()} values />,
+    );
 
     fireEvent.click(getByTestId("translateButton"));
 

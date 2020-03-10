@@ -3,6 +3,8 @@ import TranslatorView from "./TranslatorView";
 import DictionaryView from "./DictionaryView";
 import baseUrl from "../utils/baseUrl";
 import axios from "axios";
+import TranslatorViewAppBar from "./TranslatorViewAppBar";
+import DictionaryViewAppBar from "./DictionaryViewAppBar";
 
 export class Controller extends Component {
   state = {
@@ -61,21 +63,27 @@ export class Controller extends Component {
     switch (step) {
       case 1:
         return (
-          <TranslatorView
-            nextStep={this.nextStep}
-            values={values}
-            handleChange={this.handleChange}
-            handleState={this.handleState}
-            componentDidMount={this.componentDidMount}
-          />
+          <React.Fragment>
+            <TranslatorViewAppBar />
+            <TranslatorView
+              nextStep={this.nextStep}
+              values={values}
+              handleChange={this.handleChange}
+              handleState={this.handleState}
+              componentDidMount={this.componentDidMount}
+            />
+          </React.Fragment>
         );
       case 2:
         return (
-          <DictionaryView
-            prevStep={this.prevStep}
-            values={values}
-            componentDidMount={this.componentDidMount}
-          />
+          <React.Fragment>
+            <DictionaryViewAppBar />
+            <DictionaryView
+              prevStep={this.prevStep}
+              values={values}
+              componentDidMount={this.componentDidMount}
+            />
+          </React.Fragment>
         );
     }
   }

@@ -71,14 +71,6 @@ export class DictionaryView extends Component {
     const { values } = this.props;
     return (
       <React.Fragment>
-        <AppBar style={styles.appBar} position="sticky">
-          <Typography variant="h4">English/Pig Latin Translations</Typography>
-          <Typography variant="h6">
-            (Englishay/Igpay Atinlay anslationstray)
-          </Typography>
-        </AppBar>
-        <br />
-        <br />
         <Card style={styles.card}>
           <br />
           <Chip label="Translator" onClick={this.seeTranslator} clickable />

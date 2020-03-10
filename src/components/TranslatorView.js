@@ -48,14 +48,6 @@ export class TranslatorView extends Component {
     const { values, handleChange, componentDidMount } = this.props;
     return (
       <React.Fragment>
-        <AppBar style={styles.appBar} position="static">
-          <Typography variant="h4">English to Pig Latin Translator</Typography>
-          <Typography variant="h6">
-            (Englishay otay Igpay Atinlay Anslatortray)
-          </Typography>
-        </AppBar>
-        <br />
-        <br />
         <Card style={styles.card}>
           <br />
           <Chip

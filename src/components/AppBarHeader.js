@@ -2,15 +2,14 @@ import React, { Component } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 
-export class TranslatorViewAppBar extends Component {
+export class AppBarHeader extends Component {
   render() {
+    const { settings } = this.props;
     return (
       <React.Fragment>
-        <AppBar style={styles.appBar} position="static">
-          <Typography variant="h4">English to Pig Latin Translator</Typography>
-          <Typography variant="h6">
-            (Englishay otay Igpay Atinlay Anslatortray)
-          </Typography>
+        <AppBar style={styles.appBar} position={settings.appBarPosition}>
+          <Typography variant="h4">{settings.appBarEnglish}</Typography>
+          <Typography variant="h6">{settings.appBarPigLatin}</Typography>
         </AppBar>
         <br />
         <br />
@@ -26,4 +25,4 @@ const styles = {
   },
 };
 
-export default TranslatorViewAppBar;
+export default AppBarHeader;

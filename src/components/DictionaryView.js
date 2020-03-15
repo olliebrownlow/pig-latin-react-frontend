@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import AppBar from "@material-ui/core/AppBar";
-import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,12 +7,16 @@ import MaterialTable from "material-table";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import baseUrl from "../utils/baseUrl";
+import AppBarHeader from "./AppBarHeader";
 
 export class DictionaryView extends Component {
   state = {
     snackbaropen: false,
     snackbarmsg:
       "Not translated! Either you left the field blank or the phrase is already in the history. Try searching for it.",
+    appBarEnglish: "English/Pig Latin Translations",
+    appBarPigLatin: "(Englishay/Igpay Atinlay anslationstray)",
+    appBarPosition: "sticky",
     columns: [
       { title: "English", field: "english" },
       { title: "Pig Latin", field: "pig_latin", editable: "never" },
@@ -69,8 +71,11 @@ export class DictionaryView extends Component {
 
   render() {
     const { values } = this.props;
+    const { appBarEnglish, appBarPigLatin, appBarPosition } = this.state;
+    const settings = { appBarEnglish, appBarPigLatin, appBarPosition };
     return (
       <React.Fragment>
+        <AppBarHeader settings={settings} />
         <Card style={styles.card}>
           <br />
           <Chip label="Translator" onClick={this.seeTranslator} clickable />

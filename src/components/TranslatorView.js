@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -11,11 +10,15 @@ import CardContent from "@material-ui/core/CardContent";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import baseUrl from "../utils/baseUrl";
+import AppBarHeader from "./AppBarHeader";
 
 export class TranslatorView extends Component {
   state = {
     snackbaropen: false,
     snackbarmsg: "Please enter text to translate",
+    appBarEnglish: "English to Pig Latin Translator",
+    appBarPigLatin: "(Englishay otay Igpay Atinlay Anslatortray)",
+    appBarPosition: "static",
   };
 
   snackbarClose = e => {
@@ -46,8 +49,11 @@ export class TranslatorView extends Component {
 
   render() {
     const { values, handleChange, componentDidMount } = this.props;
+    const { appBarEnglish, appBarPigLatin, appBarPosition } = this.state;
+    const settings = { appBarEnglish, appBarPigLatin, appBarPosition };
     return (
       <React.Fragment>
+        <AppBarHeader settings={settings} />
         <Card style={styles.card}>
           <br />
           <Chip

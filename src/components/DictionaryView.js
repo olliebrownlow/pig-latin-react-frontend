@@ -17,6 +17,7 @@ export class DictionaryView extends Component {
     appBarEnglish: "English/Pig Latin Translations",
     appBarPigLatin: "(Englishay/Igpay Atinlay anslationstray)",
     appBarPosition: "sticky",
+    chipLabel: "Translator",
     columns: [
       { title: "English", field: "english" },
       { title: "Pig Latin", field: "pig_latin", editable: "never" },

@@ -11,6 +11,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import baseUrl from "../utils/baseUrl";
 import AppBarHeader from "./AppBarHeader";
+import ChipButton from "./ChipButton";
 
 export class TranslatorView extends Component {
   state = {
@@ -19,17 +20,13 @@ export class TranslatorView extends Component {
     appBarEnglish: "English to Pig Latin Translator",
     appBarPigLatin: "(Englishay otay Igpay Atinlay Anslatortray)",
     appBarPosition: "static",
+    chipLabel: "Translation History",
   };
 
   snackbarClose = e => {
     this.setState({
       snackbaropen: false,
     });
-  };
-
-  seeTranslationHistory = e => {
-    e.preventDefault();
-    this.props.nextStep();
   };
 
   getTranslation = e => {
@@ -48,7 +45,8 @@ export class TranslatorView extends Component {
   };
 
   render() {
-    const { values, handleChange, componentDidMount } = this.props;
+    const { values, handleChange, componentDidMount, nextStep } = this.props;
+    const functions = { componentDidMount, nextStep };
     const { appBarEnglish, appBarPigLatin, appBarPosition } = this.state;
     const settings = { appBarEnglish, appBarPigLatin, appBarPosition };
     return (
@@ -56,14 +54,7 @@ export class TranslatorView extends Component {
         <AppBarHeader settings={settings} />
         <Card style={styles.card}>
           <br />
-          <Chip
-            label="Translation History"
-            onClick={e => {
-              this.seeTranslationHistory(e);
-              componentDidMount();
-            }}
-            clickable
-          />
+          <ChipButton functions={functions} />
           <br />
           <form
             onSubmit={e => {

@@ -8,6 +8,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import baseUrl from "../utils/baseUrl";
 import AppBarHeader from "./AppBarHeader";
+import ChipButton from "./ChipButton";
 
 export class DictionaryView extends Component {
   state = {
@@ -56,11 +57,6 @@ export class DictionaryView extends Component {
       });
   }
 
-  seeTranslator = e => {
-    e.preventDefault();
-    this.props.prevStep();
-  };
-
   allEnglishValues = () => {
     const { values } = this.props;
     let phrases = [];
@@ -71,15 +67,22 @@ export class DictionaryView extends Component {
   };
 
   render() {
-    const { values } = this.props;
-    const { appBarEnglish, appBarPigLatin, appBarPosition } = this.state;
+    const { values, prevStep } = this.props;
+    const functions = { prevStep };
+    const {
+      appBarEnglish,
+      appBarPigLatin,
+      appBarPosition,
+      chipLabel,
+    } = this.state;
     const settings = { appBarEnglish, appBarPigLatin, appBarPosition };
+    const chipValue = { chipLabel };
     return (
       <React.Fragment>
         <AppBarHeader settings={settings} />
         <Card style={styles.card}>
           <br />
-          <Chip label="Translator" onClick={this.seeTranslator} clickable />
+          <ChipButton functions={functions} chipValue={chipValue} />
           <br />
           <CardContent>
             <Snackbar

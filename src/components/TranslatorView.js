@@ -47,14 +47,20 @@ export class TranslatorView extends Component {
   render() {
     const { values, handleChange, componentDidMount, nextStep } = this.props;
     const functions = { componentDidMount, nextStep };
-    const { appBarEnglish, appBarPigLatin, appBarPosition } = this.state;
+    const {
+      appBarEnglish,
+      appBarPigLatin,
+      appBarPosition,
+      chipLabel,
+    } = this.state;
     const settings = { appBarEnglish, appBarPigLatin, appBarPosition };
+    const chipValue = { chipLabel };
     return (
       <React.Fragment>
         <AppBarHeader settings={settings} />
         <Card style={styles.card}>
           <br />
-          <ChipButton functions={functions} />
+          <ChipButton functions={functions} chipValue={chipValue} />
           <br />
           <form
             onSubmit={e => {

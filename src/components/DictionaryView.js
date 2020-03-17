@@ -74,11 +74,15 @@ export class DictionaryView extends Component {
       appBarPosition,
       chipLabel,
     } = this.state;
-    const settings = { appBarEnglish, appBarPigLatin, appBarPosition };
+    const appBarHeaderSettings = {
+      appBarEnglish,
+      appBarPigLatin,
+      appBarPosition,
+    };
     const chipValue = { chipLabel };
     return (
       <React.Fragment>
-        <AppBarHeader settings={settings} />
+        <AppBarHeader settings={appBarHeaderSettings} />
         <Card style={styles.card}>
           <br />
           <ChipButton functions={functions} chipValue={chipValue} />

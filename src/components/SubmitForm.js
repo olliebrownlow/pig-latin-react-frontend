@@ -5,11 +5,15 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
 import baseUrl from "../utils/baseUrl";
+import SnackBarModal from "./SnackBarModal";
 
 export class SubmitForm extends Component {
+  constructor(props) {
+    super(props);
+    this.snackBarModalElement = React.createRef();
+  }
+
   state = {
     snackbaropen: false,
     snackbarmsg: "Please enter text to translate",
@@ -36,6 +40,10 @@ export class SubmitForm extends Component {
     e.preventDefault();
   };
 
+  handleEmptySubmit = () => {
+    this.snackBarModalElement.current.setFlag();
+  };
+
   render() {
     const { submitFormFunctions } = this.props;
     return (
@@ -45,7 +53,7 @@ export class SubmitForm extends Component {
             if (submitFormFunctions.values.english !== "") {
               this.getTranslation(e);
             } else {
-              this.setState({ snackbaropen: true });
+              this.handleEmptySubmit();
             }
             e.preventDefault();
           }}
@@ -58,23 +66,7 @@ export class SubmitForm extends Component {
             onChange={submitFormFunctions.handleChange("english")}
             defaultValue={submitFormFunctions.values.english}
           />
-          <Snackbar
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
-            open={this.state.snackbaropen}
-            autoHideDuration={2000}
-            onClose={this.snackbarClose}
-            message={<span>{this.state.snackbarmsg}</span>}
-            action={[
-              <IconButton
-                key="close"
-                aria-label="close"
-                color="inherit"
-                onClick={this.snackbarClose}
-              >
-                x
-              </IconButton>,
-            ]}
-          />
+          <SnackBarModal ref={this.snackBarModalElement} />
           <br />
           <CardContent>
             <Typography style={styles.title} color="textSecondary" gutterBottom>

@@ -23,9 +23,7 @@ export class ChipButton extends Component {
               this.seeTranslationHistory(e);
               this.props.functions.componentDidMount();
             } else {
-              {
-                this.seeTranslator(e);
-              }
+              this.seeTranslator(e);
             }
           }}
           clickable

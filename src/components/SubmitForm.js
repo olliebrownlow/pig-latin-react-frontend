@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import baseUrl from "../utils/baseUrl";
 import SnackBarModal from "./SnackBarModal";
+import SubmitButton from "./SubmitButton";
 
 export class SubmitForm extends Component {
   constructor(props) {
@@ -76,17 +75,7 @@ export class SubmitForm extends Component {
               {submitFormFunctions.values.pigLatin}
             </Typography>
           </CardContent>
-          <CardActions>
-            <Button
-              type="submit"
-              size="small"
-              variant="contained"
-              style={styles.button}
-              data-testid="translateButton"
-            >
-              Submit
-            </Button>
-          </CardActions>
+          <SubmitButton />
         </form>
       </React.Fragment>
     );
@@ -96,11 +85,6 @@ export class SubmitForm extends Component {
 const styles = {
   title: {
     fontSize: 14,
-  },
-  button: {
-    backgroundColor: "#ffe300",
-    color: "#031121",
-    width: 150,
   },
   textField: {
     width: 250,

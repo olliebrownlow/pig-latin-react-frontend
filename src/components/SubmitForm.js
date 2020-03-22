@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
 import CardContent from "@material-ui/core/CardContent";
 import baseUrl from "../utils/baseUrl";
 import SnackBarModal from "./SnackBarModal";
 import SubmitButton from "./SubmitButton";
+import TranslateTextField from "./TranslateTextfield";
 
 export class SubmitForm extends Component {
   constructor(props) {
@@ -57,14 +57,7 @@ export class SubmitForm extends Component {
             e.preventDefault();
           }}
         >
-          <TextField
-            label="Enter text"
-            placeholder="e.g., risk assessment"
-            margin="normal"
-            style={styles.textField}
-            onChange={submitFormFunctions.handleChange("english")}
-            defaultValue={submitFormFunctions.values.english}
-          />
+          <TranslateTextField submitFormFunctions={submitFormFunctions} />
           <SnackBarModal ref={this.snackBarModalElement} />
           <br />
           <CardContent>
@@ -85,9 +78,6 @@ export class SubmitForm extends Component {
 const styles = {
   title: {
     fontSize: 14,
-  },
-  textField: {
-    width: 250,
   },
 };
 

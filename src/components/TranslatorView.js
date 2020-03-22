@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
-import AppBarHeader from "./AppBarHeader";
-import ChipButton from "./ChipButton";
-import SubmitForm from "./SubmitForm";
+import AppBarHeader from "./SharedComponents/AppBarHeader";
+import ChipButton from "./SharedComponents/ChipButton";
+import SubmitForm from "./TranslatorViewComponents/SubmitForm";
 
 export class TranslatorView extends Component {
   state = {

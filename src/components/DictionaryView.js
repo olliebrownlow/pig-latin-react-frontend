@@ -6,8 +6,8 @@ import MaterialTable from "material-table";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import baseUrl from "../utils/baseUrl";
-import AppBarHeader from "./AppBarHeader";
-import ChipButton from "./ChipButton";
+import AppBarHeader from "./SharedComponents/AppBarHeader";
+import ChipButton from "./SharedComponents/ChipButton";
 
 export class DictionaryView extends Component {
   state = {

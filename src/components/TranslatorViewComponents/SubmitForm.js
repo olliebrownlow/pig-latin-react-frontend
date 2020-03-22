@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
-import baseUrl from "../utils/baseUrl";
-import SnackBarModal from "./SnackBarModal";
-import SubmitButton from "./SubmitButton";
-import TranslateTextField from "./TranslateTextfield";
+import baseUrl from "../../utils/baseUrl";
+import SnackBarModal from "../SharedComponents/SnackBarModal";
+import SubmitButton from "./SubmitFormComponents/SubmitButton";
+import TranslateTextField from "./SubmitFormComponents/TranslateTextfield";
 
 export class SubmitForm extends Component {
   constructor(props) {

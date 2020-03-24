@@ -33,7 +33,7 @@ export class SubmitForm extends Component {
     e.preventDefault();
   };
 
-  handleEmptySubmit = () => {
+  triggerSnackBarOpen = () => {
     this.snackBarModalElement.current.setFlag();
   };
 
@@ -48,7 +48,7 @@ export class SubmitForm extends Component {
             if (submitFormFunctions.values.english !== "") {
               this.getTranslation(e);
             } else {
-              this.handleEmptySubmit();
+              this.triggerSnackBarOpen();
             }
             e.preventDefault();
           }}

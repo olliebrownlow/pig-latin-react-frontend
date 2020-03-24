@@ -3,15 +3,18 @@ import axios from "axios";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import MaterialTable from "material-table";
-import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
 import baseUrl from "../utils/baseUrl";
 import AppBarHeader from "./SharedComponents/AppBarHeader";
 import ChipButton from "./SharedComponents/ChipButton";
+import SnackBarModal from "./SharedComponents/SnackBarModal";
 
 export class DictionaryView extends Component {
+  constructor(props) {
+    super(props);
+    this.snackBarModalElement = React.createRef();
+  }
+
   state = {
-    snackbaropen: false,
     snackbarmsg:
       "Not translated! Either you left the field blank or the phrase is already in the history. Try searching for it.",
     appBarEnglish: "English/Pig Latin Translations",
@@ -22,12 +25,6 @@ export class DictionaryView extends Component {
       { title: "English", field: "english" },
       { title: "Pig Latin", field: "pig_latin", editable: "never" },
     ],
-  };
-
-  snackbarClose = e => {
-    this.setState({
-      snackbaropen: false,
-    });
   };
 
   handleDelete(id) {
@@ -65,6 +62,10 @@ export class DictionaryView extends Component {
     return phrases;
   };
 
+  triggerSnackBarOpen = () => {
+    this.snackBarModalElement.current.setFlag();
+  };
+
   render() {
     const { values, prevStep } = this.props;
     const functions = { prevStep };
@@ -80,6 +81,8 @@ export class DictionaryView extends Component {
       appBarPosition,
     };
     const chipValue = { chipLabel };
+    const { snackbarmsg } = this.state;
+    const snackbarmessage = { snackbarmsg };
     return (
       <React.Fragment>
         <AppBarHeader settings={appBarHeaderSettings} />
@@ -88,22 +91,9 @@ export class DictionaryView extends Component {
           <ChipButton functions={functions} chipValue={chipValue} />
           <br />
           <CardContent>
-            <Snackbar
-              anchorOrigin={{ vertical: "top", horizontal: "center" }}
-              open={this.state.snackbaropen}
-              autoHideDuration={5000}
-              onClose={this.snackbarClose}
-              message={<span>{this.state.snackbarmsg}</span>}
-              action={[
-                <IconButton
-                  key="close"
-                  aria-label="close"
-                  color="inherit"
-                  onClick={this.snackbarClose}
-                >
-                  x
-                </IconButton>,
-              ]}
+            <SnackBarModal
+              snackbarmsg={snackbarmessage}
+              ref={this.snackBarModalElement}
             />
             <MaterialTable
               localization={{
@@ -147,7 +137,7 @@ export class DictionaryView extends Component {
                           this.handleEdit(id, newData.english, () => resolve());
                         }
                       } else {
-                        this.setState({ snackbaropen: true });
+                        this.triggerSnackBarOpen();
                       }
                       resolve();
                     }, 1000);

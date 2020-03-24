@@ -5,7 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 export class SnackBarModal extends Component {
   state = {
     snackbaropen: false,
-    snackbarmsg: "Please enter text to translate",
   };
 
   //called from the parent component (SubmitForm)
@@ -22,6 +21,7 @@ export class SnackBarModal extends Component {
   };
 
   render() {
+    const { snackbarmsg } = this.props;
     return (
       <React.Fragment>
         <Snackbar
@@ -29,7 +29,7 @@ export class SnackBarModal extends Component {
           open={this.state.snackbaropen}
           autoHideDuration={4000}
           onClose={this.snackbarClose}
-          message={<span>{this.state.snackbarmsg}</span>}
+          message={<span>{snackbarmsg.snackbarmsg}</span>}
           action={[
             <IconButton
               key="close"

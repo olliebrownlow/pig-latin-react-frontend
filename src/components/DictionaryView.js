@@ -180,10 +180,6 @@ const styles = {
     width: 750,
     justify: "center",
   },
-  appBar: {
-    background: "#ffe300",
-    padding: "20px",
-  },
 };
 
 export default DictionaryView;

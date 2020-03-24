@@ -14,6 +14,10 @@ export class SubmitForm extends Component {
     this.snackBarModalElement = React.createRef();
   }
 
+  state = {
+    snackbarmsg: "Please enter text to translate",
+  };
+
   getTranslation = e => {
     const { submitFormFunctions } = this.props;
     const url = `${baseUrl}/terminologies`;
@@ -35,6 +39,8 @@ export class SubmitForm extends Component {
 
   render() {
     const { submitFormFunctions } = this.props;
+    const { snackbarmsg } = this.state;
+    const snackbarmessage = { snackbarmsg };
     return (
       <React.Fragment>
         <form
@@ -48,7 +54,10 @@ export class SubmitForm extends Component {
           }}
         >
           <TranslateTextField submitFormFunctions={submitFormFunctions} />
-          <SnackBarModal ref={this.snackBarModalElement} />
+          <SnackBarModal
+            snackbarmsg={snackbarmessage}
+            ref={this.snackBarModalElement}
+          />
           <br />
           <CardContent>
             <TranslatedPhraseHeader />

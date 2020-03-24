@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import baseUrl from "../../utils/baseUrl";
 import SnackBarModal from "../SharedComponents/SnackBarModal";
 import SubmitButton from "./SubmitFormComponents/SubmitButton";
 import TranslateTextField from "./SubmitFormComponents/TranslateTextfield";
+import TranslatedPhraseHeader from "./SubmitFormComponents/TranslatedPhraseHeader";
+import TranslatedPhrasePigLatin from "./SubmitFormComponents/TranslatedPhrasePigLatin";
 
 export class SubmitForm extends Component {
   constructor(props) {
@@ -61,12 +62,10 @@ export class SubmitForm extends Component {
           <SnackBarModal ref={this.snackBarModalElement} />
           <br />
           <CardContent>
-            <Typography style={styles.title} color="textSecondary" gutterBottom>
-              Pig Latin:
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {submitFormFunctions.values.pigLatin}
-            </Typography>
+            <TranslatedPhraseHeader />
+            <TranslatedPhrasePigLatin
+              submitFormFunctions={submitFormFunctions}
+            />
           </CardContent>
           <SubmitButton />
         </form>
@@ -74,11 +73,5 @@ export class SubmitForm extends Component {
     );
   }
 }
-
-const styles = {
-  title: {
-    fontSize: 14,
-  },
-};
 
 export default SubmitForm;

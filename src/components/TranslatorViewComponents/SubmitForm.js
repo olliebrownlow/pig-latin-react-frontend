@@ -14,17 +14,6 @@ export class SubmitForm extends Component {
     this.snackBarModalElement = React.createRef();
   }
 
-  state = {
-    snackbaropen: false,
-    snackbarmsg: "Please enter text to translate",
-  };
-
-  snackbarClose = e => {
-    this.setState({
-      snackbaropen: false,
-    });
-  };
-
   getTranslation = e => {
     const { submitFormFunctions } = this.props;
     const url = `${baseUrl}/terminologies`;

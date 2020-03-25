@@ -1,73 +1,20 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import MaterialTable from "material-table";
-import baseUrl from "../utils/baseUrl";
 import AppBarHeader from "./SharedComponents/AppBarHeader";
 import ChipButton from "./SharedComponents/ChipButton";
-import SnackBarModal from "./SharedComponents/SnackBarModal";
+import TableOfTranslations from "./DictionaryViewComponents/TableOfTranslations";
 
 export class DictionaryView extends Component {
-  constructor(props) {
-    super(props);
-    this.snackBarModalElement = React.createRef();
-  }
-
   state = {
-    snackbarmsg:
-      "Not translated! Either you left the field blank or the phrase is already in the history. Try searching for it.",
     appBarEnglish: "English/Pig Latin Translations",
     appBarPigLatin: "(Englishay/Igpay Atinlay anslationstray)",
     appBarPosition: "sticky",
     chipLabel: "Translator",
-    columns: [
-      { title: "English", field: "english" },
-      { title: "Pig Latin", field: "pig_latin", editable: "never" },
-    ],
-  };
-
-  handleDelete(id) {
-    const url = `${baseUrl}/terminologies/${id}`;
-    axios
-      .delete(url)
-      .then(response => {
-        this.props.componentDidMount();
-      })
-      .catch(error => {
-        console.log("delete error", error);
-      });
-  }
-
-  handleEdit(id, data) {
-    const url = `${baseUrl}/terminologies/${id}`;
-    axios
-      .put(url, {
-        english: data.toLowerCase().replace(/[^a-z\s]/gi, ""),
-      })
-      .then(response => {
-        this.props.componentDidMount();
-      })
-      .catch(error => {
-        console.log("edit error", error);
-      });
-  }
-
-  allEnglishValues = () => {
-    const { values } = this.props;
-    let phrases = [];
-    values.allTranslations.forEach(function(translation) {
-      phrases.push(translation.english);
-    });
-    return phrases;
-  };
-
-  triggerSnackBarOpen = () => {
-    this.snackBarModalElement.current.setFlag();
   };
 
   render() {
-    const { values, prevStep } = this.props;
+    const { values, prevStep, componentDidMount } = this.props;
     const functions = { prevStep };
     const {
       appBarEnglish,
@@ -81,8 +28,7 @@ export class DictionaryView extends Component {
       appBarPosition,
     };
     const chipValue = { chipLabel };
-    const { snackbarmsg } = this.state;
-    const snackbarmessage = { snackbarmsg };
+    const items = { values, componentDidMount };
     return (
       <React.Fragment>
         <AppBarHeader settings={appBarHeaderSettings} />
@@ -91,73 +37,7 @@ export class DictionaryView extends Component {
           <ChipButton functions={functions} chipValue={chipValue} />
           <br />
           <CardContent>
-            <SnackBarModal
-              snackbarmsg={snackbarmessage}
-              ref={this.snackBarModalElement}
-            />
-            <MaterialTable
-              localization={{
-                body: {
-                  emptyDataSourceMessage:
-                    "No data: please translate something first.",
-                },
-                toolbar: {
-                  searchTooltip: "Search",
-                },
-                pagination: {
-                  labelDisplayedRows: "{from}-{to} of {count}",
-                  firstTooltip: "First page",
-                  previousTooltip: "Previous page",
-                  nextTooltip: "Next page",
-                  lastTooltip: "Last Page",
-                },
-              }}
-              options={{
-                pageSize: 5,
-                pageSizeOptions: [5, 10, 20, 50],
-              }}
-              title="Translation history"
-              columns={this.state.columns}
-              data={values.allTranslations}
-              editable={{
-                onRowUpdate: (newData, oldData) =>
-                  new Promise((resolve, reject) => {
-                    const listOfPhrases = this.allEnglishValues();
-                    setTimeout(() => {
-                      if (
-                        newData.english !== "" &&
-                        !listOfPhrases.includes(newData.english)
-                      ) {
-                        {
-                          let data = values.allTranslations;
-                          const index = data.indexOf(oldData);
-                          const id = data[index].id;
-                          data[index] = newData;
-                          this.setState({ data });
-                          this.handleEdit(id, newData.english, () => resolve());
-                        }
-                      } else {
-                        this.triggerSnackBarOpen();
-                      }
-                      resolve();
-                    }, 1000);
-                  }),
-                onRowDelete: oldData =>
-                  new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                      {
-                        let data = values.allTranslations;
-                        const index = data.indexOf(oldData);
-                        const id = data[index].id;
-                        data.splice(index, 1);
-                        this.handleDelete(id);
-                        this.setState({ data }, () => resolve());
-                      }
-                      resolve();
-                    }, 1000);
-                  }),
-              }}
-            />
+            <TableOfTranslations items={items} />
           </CardContent>
         </Card>
       </React.Fragment>

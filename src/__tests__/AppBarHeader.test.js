@@ -3,7 +3,7 @@ import { render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import AppBarHeader from "../components/SharedComponents/AppBarHeader";
 
-describe("AppBarHeader", () => {
+describe("The AppBarHeader", () => {
   let settings;
   let getByTestId;
 
@@ -29,7 +29,7 @@ describe("AppBarHeader", () => {
     );
   });
 
-  it("has the right styles", () => {
+  it("has the right styling", () => {
     expect(getByTestId("position")).toHaveStyle({
       background: "#ffe300",
       padding: "20px",

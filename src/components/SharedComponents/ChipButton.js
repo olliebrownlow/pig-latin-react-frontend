@@ -17,6 +17,7 @@ export class ChipButton extends Component {
     return (
       <React.Fragment>
         <Chip
+          data-testid="button"
           label={chipValue.chipLabel}
           onClick={e => {
             if (chipValue.chipLabel === "Translation History") {

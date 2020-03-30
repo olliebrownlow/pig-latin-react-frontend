@@ -44,6 +44,7 @@ export class SubmitForm extends Component {
     return (
       <React.Fragment>
         <form
+          data-testid="submitForm"
           onSubmit={e => {
             if (submitFormFunctions.values.english !== "") {
               this.getTranslation(e);

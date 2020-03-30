@@ -26,6 +26,7 @@ export class SnackBarModal extends Component {
       <React.Fragment>
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          data-testid="modal"
           open={this.state.snackbaropen}
           autoHideDuration={4000}
           onClose={this.snackbarClose}

@@ -5,7 +5,12 @@ export class TranslatedPhraseHeader extends Component {
   render() {
     return (
       <React.Fragment>
-        <Typography style={styles.title} color="textSecondary" gutterBottom>
+        <Typography
+          data-testid="header"
+          style={styles.title}
+          color="textSecondary"
+          gutterBottom
+        >
           Pig Latin:
         </Typography>
       </React.Fragment>

@@ -6,7 +6,7 @@ export class TranslatedPhrasePigLatin extends Component {
     const { submitFormFunctions } = this.props;
     return (
       <React.Fragment>
-        <Typography variant="h5" component="h2">
+        <Typography data-testid="translation" variant="h5" component="h2">
           {submitFormFunctions.values.pigLatin}
         </Typography>
       </React.Fragment>

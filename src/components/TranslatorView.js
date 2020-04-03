@@ -37,7 +37,7 @@ export class TranslatorView extends Component {
     return (
       <React.Fragment>
         <AppBarHeader settings={appBarHeaderSettings} />
-        <Card style={styles.card}>
+        <Card data-testid="cardElement" style={styles.card}>
           <br />
           <ChipButton functions={functions} chipValue={chipValue} />
           <br />

@@ -4,18 +4,36 @@ import "@testing-library/jest-dom/extend-expect";
 import TranslatorView from "../components/TranslatorView";
 
 describe("TranslatorView", () => {
+  let submitFormFunctions;
+  let getByTestId;
+
+  beforeEach(() => {
+    submitFormFunctions = {
+      handleChange: jest.fn(),
+      values: { english: "placeHolder" },
+    };
+
+    ({ getByTestId } = render(
+      <TranslatorView
+        submitFormFunctions={submitFormFunctions}
+        handleChange={submitFormFunctions.handleChange}
+        values={submitFormFunctions.values}
+      />,
+    ));
+  });
+
   afterEach(cleanup);
 
-  test.skip("Calls the onSubmit function when submit is clicked", () => {
-    var values = {};
-    values[0] = "risk";
+  it("has the right styles", () => {
+    expect(getByTestId("cardElement")).toHaveStyle({
+      width: "60%",
+      justify: "center",
+    });
+  });
 
-    const { getByTestId } = render(
-      <TranslatorView handleChange={jest.fn()} values />,
-    );
-
-    fireEvent.click(getByTestId("translateButton"));
-
-    expect(jest.fn()).toHaveBeenCalledTimes(1);
+  it("has the right elements in the DOM", () => {
+    expect(getByTestId("appBar")).toBeInTheDOM;
+    expect(getByTestId("button")).toBeInTheDOM;
+    expect(getByTestId("submitForm")).toBeInTheDOM;
   });
 });

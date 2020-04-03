@@ -8,7 +8,7 @@ export class AppBarHeader extends Component {
     return (
       <React.Fragment>
         <AppBar
-          data-testid="position"
+          data-testid="appBar"
           style={styles.appBar}
           position={settings.appBarPosition}
         >

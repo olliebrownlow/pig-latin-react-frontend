@@ -30,7 +30,7 @@ describe("The AppBarHeader", () => {
   });
 
   it("has the right styling", () => {
-    expect(getByTestId("position")).toHaveStyle({
+    expect(getByTestId("appBar")).toHaveStyle({
       background: "#ffe300",
       padding: "20px",
       position: settings.appBarPosition,

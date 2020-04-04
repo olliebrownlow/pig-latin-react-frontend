@@ -5,6 +5,7 @@ import baseUrl from "../utils/baseUrl";
 import axios from "axios";
 
 export class Controller extends Component {
+  _isMounted = false;
   state = {
     step: 1,
     pigLatin: "",
@@ -41,17 +42,24 @@ export class Controller extends Component {
   };
 
   componentDidMount = () => {
+    this._isMounted = true;
     const url = `${baseUrl}/terminologies`;
     axios
       .get(url)
       .then(response => response.data)
       .then(data => {
-        this.setState({ allTranslations: data.translations });
+        if (this._isMounted) {
+          this.setState({ allTranslations: data.translations });
+        }
       })
       .catch(error => {
         console.log("getting all translations error", error);
       });
   };
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   render() {
     const { step } = this.state;

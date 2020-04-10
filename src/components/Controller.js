@@ -14,9 +14,9 @@ export class Controller extends Component {
   };
 
   //Handle field changes
-  handleChange = input => e => {
+  handleChange = e => {
     this.setState({
-      [input]: e.target.value.toLowerCase().replace(/[^a-z\s]/gi, ""),
+      ["english"]: e.target.value.toLowerCase().replace(/[^a-z\s]/gi, ""),
     });
   };
 

@@ -7,12 +7,13 @@ export class TranslateTextField extends Component {
     return (
       <React.Fragment>
         <TextField
+          inputProps={{ "data-testid": "textToTranslate" }}
           label="Enter text"
           placeholder="e.g., risk assessment"
           margin="normal"
           style={styles.textField}
-          onChange={submitFormFunctions.handleChange("english")}
-          defaultValue={submitFormFunctions.values.english}
+          onChange={submitFormFunctions.handleChange}
+          value={submitFormFunctions.values.english}
         />
       </React.Fragment>
     );
@@ -21,7 +22,7 @@ export class TranslateTextField extends Component {
 
 const styles = {
   textField: {
-    width: 250,
+    width: 350,
   },
 };
 

@@ -25,7 +25,6 @@ export class SubmitButton extends Component {
 const styles = {
   button: {
     backgroundColor: "#ffe300",
-    color: "#031121",
     width: 150,
   },
 };

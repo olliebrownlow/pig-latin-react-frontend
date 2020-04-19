@@ -50,7 +50,7 @@ export class TranslatorView extends Component {
 
 const styles = {
   card: {
-    width: "60%",
+    width: "750px",
     justify: "center",
   },
 };

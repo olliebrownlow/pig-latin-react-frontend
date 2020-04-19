@@ -26,7 +26,7 @@ describe("TranslatorView", () => {
 
   it("has the right styles", () => {
     expect(getByTestId("cardElement")).toHaveStyle({
-      width: "60%",
+      width: "750px",
       justify: "center",
     });
   });

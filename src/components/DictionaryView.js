@@ -31,13 +31,23 @@ export class DictionaryView extends Component {
     const items = { values, componentDidMount };
     return (
       <React.Fragment>
-        <AppBarHeader settings={appBarHeaderSettings} />
-        <Card style={styles.card}>
+        <AppBarHeader
+          data-testid="appBarHeaderElement"
+          settings={appBarHeaderSettings}
+        />
+        <Card data-testid="cardElement" style={styles.card}>
           <br />
-          <ChipButton functions={functions} chipValue={chipValue} />
+          <ChipButton
+            data-testid="chipButtonElement"
+            functions={functions}
+            chipValue={chipValue}
+          />
           <br />
-          <CardContent>
-            <TableOfTranslations items={items} />
+          <CardContent data-testid="cardContentElement">
+            <TableOfTranslations
+              data-testid="tableOfTranslationsElement"
+              items={items}
+            />
           </CardContent>
         </Card>
       </React.Fragment>

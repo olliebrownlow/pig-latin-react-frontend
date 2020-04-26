@@ -4,6 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import AppBarHeader from "./SharedComponents/AppBarHeader";
 import ChipButton from "./SharedComponents/ChipButton";
 import TableOfTranslations from "./DictionaryViewComponents/TableOfTranslations";
+import Grid from "@material-ui/core/Grid";
 
 export class DictionaryView extends Component {
   state = {
@@ -35,31 +36,26 @@ export class DictionaryView extends Component {
           data-testid="appBarHeaderElement"
           settings={appBarHeaderSettings}
         />
-        <Card data-testid="cardElement" style={styles.card}>
-          <br />
-          <ChipButton
-            data-testid="chipButtonElement"
-            functions={functions}
-            chipValue={chipValue}
-          />
-          <br />
-          <CardContent data-testid="cardContentElement">
-            <TableOfTranslations
-              data-testid="tableOfTranslationsElement"
-              items={items}
-            />
-          </CardContent>
-        </Card>
+        <Grid container justify="center">
+          <Grid item xs={8}>
+            <Card data-testid="cardElement">
+              <br />
+              <ChipButton
+                data-testid="chipButtonElement"
+                functions={functions}
+                chipValue={chipValue}
+              />
+              <br />
+              <TableOfTranslations
+                data-testid="tableOfTranslationsElement"
+                items={items}
+              />
+            </Card>
+          </Grid>
+        </Grid>
       </React.Fragment>
     );
   }
 }
-
-const styles = {
-  card: {
-    width: 750,
-    justify: "center",
-  },
-};
 
 export default DictionaryView;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MaterialTable from "material-table";
+import Grid from "@material-ui/core/Grid";
 import SnackBarModal from "../SharedComponents/SnackBarModal";
 import baseUrl from "../../utils/baseUrl";
 import axios from "axios";
@@ -23,10 +24,10 @@ export class TranslatedPhraseHeader extends Component {
     const url = `${baseUrl}/terminologies/${id}`;
     axios
       .delete(url)
-      .then(response => {
+      .then((response) => {
         this.props.items.componentDidMount();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("delete error", error);
       });
   }
@@ -37,10 +38,10 @@ export class TranslatedPhraseHeader extends Component {
       .put(url, {
         english: data.toLowerCase().replace(/[^a-z\s]/gi, ""),
       })
-      .then(response => {
+      .then((response) => {
         this.props.items.componentDidMount();
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("edit error", error);
       });
   }
@@ -48,7 +49,7 @@ export class TranslatedPhraseHeader extends Component {
   allEnglishValues = () => {
     const { items } = this.props;
     let phrases = [];
-    items.values.allTranslations.forEach(function(translation) {
+    items.values.allTranslations.forEach(function (translation) {
       phrases.push(translation.english);
     });
     return phrases;
@@ -68,69 +69,73 @@ export class TranslatedPhraseHeader extends Component {
           snackbarmsg={snackbarmessage}
           ref={this.snackBarModalElement}
         />
-        <MaterialTable
-          localization={{
-            body: {
-              emptyDataSourceMessage:
-                "No data: please translate something first.",
-            },
-            toolbar: {
-              searchTooltip: "Search",
-            },
-            pagination: {
-              labelDisplayedRows: "{from}-{to} of {count}",
-              firstTooltip: "First page",
-              previousTooltip: "Previous page",
-              nextTooltip: "Next page",
-              lastTooltip: "Last Page",
-            },
-          }}
-          options={{
-            pageSize: 5,
-            pageSizeOptions: [5, 10, 20, 50],
-          }}
-          title="Translation history"
-          columns={this.state.columns}
-          data={items.values.allTranslations}
-          editable={{
-            onRowUpdate: (newData, oldData) =>
-              new Promise((resolve, reject) => {
-                const listOfPhrases = this.allEnglishValues();
-                setTimeout(() => {
-                  if (
-                    newData.english !== "" &&
-                    !listOfPhrases.includes(newData.english)
-                  ) {
-                    {
-                      let data = items.values.allTranslations;
-                      const index = data.indexOf(oldData);
-                      const id = data[index].id;
-                      data[index] = newData;
-                      this.setState({ data });
-                      this.handleEdit(id, newData.english, () => resolve());
-                    }
-                  } else {
-                    this.triggerSnackBarOpen();
-                  }
-                  resolve();
-                }, 1000);
-              }),
-            onRowDelete: oldData =>
-              new Promise((resolve, reject) => {
-                setTimeout(() => {
-                  {
-                    let data = items.values.allTranslations;
-                    const index = data.indexOf(oldData);
-                    const id = data[index].id;
-                    data.splice(index, 1);
-                    this.handleDelete(id);
-                    this.setState({ data }, () => resolve());
-                  }
-                  resolve();
-                }, 1000);
-              }),
-          }}
-        />
+        <Grid container justify="center">
+          <Grid item xs={10}>
+            <MaterialTable
+              localization={{
+                body: {
+                  emptyDataSourceMessage:
+                    "No data: please translate something first.",
+                },
+                toolbar: {
+                  searchTooltip: "Search",
+                },
+                pagination: {
+                  labelDisplayedRows: "{from}-{to} of {count}",
+                  firstTooltip: "First page",
+                  previousTooltip: "Previous page",
+                  nextTooltip: "Next page",
+                  lastTooltip: "Last Page",
+                },
+              }}
+              options={{
+                pageSize: 5,
+                pageSizeOptions: [5, 10, 20, 50],
+              }}
+              title="Translation history"
+              columns={this.state.columns}
+              data={items.values.allTranslations}
+              editable={{
+                onRowUpdate: (newData, oldData) =>
+                  new Promise((resolve, reject) => {
+                    const listOfPhrases = this.allEnglishValues();
+                    setTimeout(() => {
+                      if (
+                        newData.english !== "" &&
+                        !listOfPhrases.includes(newData.english)
+                      ) {
+                        {
+                          let data = items.values.allTranslations;
+                          const index = data.indexOf(oldData);
+                          const id = data[index].id;
+                          data[index] = newData;
+                          this.setState({ data });
+                          this.handleEdit(id, newData.english, () => resolve());
+                        }
+                      } else {
+                        this.triggerSnackBarOpen();
+                      }
+                      resolve();
+                    }, 1000);
+                  }),
+                onRowDelete: (oldData) =>
+                  new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                      {
+                        let data = items.values.allTranslations;
+                        const index = data.indexOf(oldData);
+                        const id = data[index].id;
+                        data.splice(index, 1);
+                        this.handleDelete(id);
+                        this.setState({ data }, () => resolve());
+                      }
+                      resolve();
+                    }, 1000);
+                  }),
+              }}
+            />
+          </Grid>
+        </Grid>
       </React.Fragment>
     );
   }

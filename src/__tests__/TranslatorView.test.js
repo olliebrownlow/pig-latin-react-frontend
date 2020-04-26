@@ -24,13 +24,6 @@ describe("TranslatorView", () => {
 
   afterEach(cleanup);
 
-  it("has the right styles", () => {
-    expect(getByTestId("cardElement")).toHaveStyle({
-      width: "750px",
-      justify: "center",
-    });
-  });
-
   it("has the right elements in the DOM", () => {
     expect(getByTestId("appBar")).toBeInTheDOM;
     expect(getByTestId("button")).toBeInTheDOM;

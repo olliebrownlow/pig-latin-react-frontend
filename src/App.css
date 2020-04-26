@@ -7,25 +7,6 @@ body {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #09d3ac;
-}
-
 .MuiTypography-root.MuiTypography-h4 {
   color: #031121;
 }
@@ -57,13 +38,30 @@ body {
 
 .MuiCardActions-root {
   justify-content: center;
-  margin-bottom: 15px;
+  margin-bottom: 16px;
 }
 
-.MuiChip-root.MuiChip-clickable {
-  margin-left: 550px;
+.MuiChip-root {
+  margin-right: 16px;
+  margin-left: 16px;
 }
 
 .MuiPaper-root.MuiPaper-elevation2.MuiPaper-rounded {
   box-shadow: none;
+}
+
+.MuiTextField-root {
+  width: 250px;
+}
+
+@media all and (max-width: 800px) {
+  .MuiTextField-root {
+    width: 175px;
+  }
+}
+
+@media all and (max-width: 500px) {
+  .MuiTextField-root {
+    width: 100px;
+  }
 }

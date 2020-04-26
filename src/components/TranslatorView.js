@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
+import Grid from "@material-ui/core/Grid";
 import AppBarHeader from "./SharedComponents/AppBarHeader";
 import ChipButton from "./SharedComponents/ChipButton";
 import SubmitForm from "./TranslatorViewComponents/SubmitForm";
@@ -37,12 +38,16 @@ export class TranslatorView extends Component {
     return (
       <React.Fragment>
         <AppBarHeader settings={appBarHeaderSettings} />
-        <Card data-testid="cardElement" style={styles.card}>
-          <br />
-          <ChipButton functions={functions} chipValue={chipValue} />
-          <br />
-          <SubmitForm submitFormFunctions={submitFormFunctions} />
-        </Card>
+        <Grid container justify="center">
+          <Grid item xs={6}>
+            <Card data-testid="cardElement" style={styles.card}>
+              <br />
+              <ChipButton functions={functions} chipValue={chipValue} />
+              <br />
+              <SubmitForm submitFormFunctions={submitFormFunctions} />
+            </Card>
+          </Grid>
+        </Grid>
       </React.Fragment>
     );
   }
@@ -50,8 +55,8 @@ export class TranslatorView extends Component {
 
 const styles = {
   card: {
-    width: "750px",
-    justify: "center",
+    // width: "750px",
+    // justify: "center",
   },
 };
 

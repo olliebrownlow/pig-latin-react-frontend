@@ -73,10 +73,12 @@ body {
   .material-icons.MuiIcon-root.MuiIcon-fontSizeSmall {
     font-size: 1rem;
   }
-  .MuiToolbar-root.MuiToolbar-regular {
-    display: block;
-  }
+
   .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-8 {
+    max-width: 77.5%;
+    flex-basis: 77.5%;
+  }
+  .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-6 {
     max-width: 77.5%;
     flex-basis: 77.5%;
   }
@@ -129,6 +131,10 @@ body {
     font-size: 0.75rem;
   }
   .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-8 {
+    max-width: 90%;
+    flex-basis: 90%;
+  }
+  .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-6 {
     max-width: 90%;
     flex-basis: 90%;
   }

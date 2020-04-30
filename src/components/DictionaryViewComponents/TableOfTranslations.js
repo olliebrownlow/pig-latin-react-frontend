@@ -77,9 +77,6 @@ export class TranslatedPhraseHeader extends Component {
                   emptyDataSourceMessage:
                     "No data: please translate something first.",
                 },
-                toolbar: {
-                  searchTooltip: "Search",
-                },
                 pagination: {
                   labelDisplayedRows: "{from}-{to} of {count}",
                   firstTooltip: "First page",
@@ -91,6 +88,9 @@ export class TranslatedPhraseHeader extends Component {
               options={{
                 pageSize: 5,
                 pageSizeOptions: [5, 10, 20, 50],
+                searchFieldStyle: {
+                  // fontSize: "50px",
+                },
               }}
               title="Translation history"
               columns={this.state.columns}

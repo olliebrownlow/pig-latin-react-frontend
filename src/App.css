@@ -54,9 +54,6 @@ body {
   width: 250px;
 }
 
-/* .MuiToolbar-root.MuiToolbar-regular
-  MTableToolbar-root-300
-  MuiToolbar-gutters */
 @media all and (max-width: 800px) {
   .MuiTextField-root {
     width: 175px;
@@ -73,7 +70,6 @@ body {
   .material-icons.MuiIcon-root.MuiIcon-fontSizeSmall {
     font-size: 1rem;
   }
-
   .MuiGrid-root.MuiGrid-item.MuiGrid-grid-xs-8 {
     max-width: 77.5%;
     flex-basis: 77.5%;
@@ -106,10 +102,10 @@ body {
   .material-icons.MuiIcon-root {
     font-size: 1.1rem;
   }
-  .MuiToolbar-root.MuiToolbar-regular {
+  /* .MuiToolbar-root.MuiToolbar-regular {
     display: block;
     padding: 0;
-  }
+  } */
   .MuiTableCell-root.MuiTableCell-alignLeft.MuiTableCell-body {
     padding: 5px;
     font-size: 0.75rem;

@@ -40,7 +40,7 @@ export class TranslatorView extends Component {
         <AppBarHeader settings={appBarHeaderSettings} />
         <Grid container justify="center">
           <Grid item xs={6}>
-            <Card data-testid="cardElement" style={styles.card}>
+            <Card data-testid="cardElement">
               <br />
               <ChipButton functions={functions} chipValue={chipValue} />
               <br />
@@ -52,12 +52,5 @@ export class TranslatorView extends Component {
     );
   }
 }
-
-const styles = {
-  card: {
-    // width: "750px",
-    // justify: "center",
-  },
-};
 
 export default TranslatorView;

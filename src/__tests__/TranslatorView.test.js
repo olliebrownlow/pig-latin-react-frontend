@@ -6,6 +6,7 @@ import TranslatorView from "../components/TranslatorView";
 describe("TranslatorView", () => {
   let submitFormFunctions;
   let getByTestId;
+  let getByText;
 
   beforeEach(() => {
     submitFormFunctions = {
@@ -13,7 +14,7 @@ describe("TranslatorView", () => {
       values: { english: "placeHolder" },
     };
 
-    ({ getByTestId } = render(
+    ({ getByTestId, getByText } = render(
       <TranslatorView
         submitFormFunctions={submitFormFunctions}
         handleChange={submitFormFunctions.handleChange}
@@ -24,9 +25,14 @@ describe("TranslatorView", () => {
 
   afterEach(cleanup);
 
-  it("has the right elements in the DOM", () => {
-    expect(getByTestId("appBar")).toBeInTheDOM;
-    expect(getByTestId("button")).toBeInTheDOM;
-    expect(getByTestId("submitForm")).toBeInTheDOM;
+  it("has the right elements and text", () => {
+    expect(getByTestId("cardElement")).toBeInTheDOM;
+    expect(getByText("English to Pig Latin Translator")).toBeInTheDocument;
+    expect(getByText("(Englishay otay Igpay Atinlay Anslatortray)"))
+      .toBeInTheDocument;
+    expect(getByText("Translation History")).toBeInTheDocument;
+    expect(getByText("Enter text")).toBeInTheDocument;
+    expect(getByText("Pig Latin:")).toBeInTheDocument;
+    expect(getByText("Submit")).toBeInTheDocument;
   });
 });

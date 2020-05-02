@@ -14,14 +14,14 @@ export class Controller extends Component {
   };
 
   //Handle field changes
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
       ["english"]: e.target.value.toLowerCase().replace(/[^a-z\s]/gi, ""),
     });
   };
 
   //Handle state changes
-  handleState = data => {
+  handleState = (data) => {
     this.setState({ pigLatin: data });
   };
 
@@ -46,13 +46,14 @@ export class Controller extends Component {
     const url = `${baseUrl}/terminologies`;
     axios
       .get(url)
-      .then(response => response.data)
-      .then(data => {
+      .then((response) => response.data)
+      .then((data) => {
         if (this._isMounted) {
+          console.log(data.translations);
           this.setState({ allTranslations: data.translations });
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("getting all translations error", error);
       });
   };

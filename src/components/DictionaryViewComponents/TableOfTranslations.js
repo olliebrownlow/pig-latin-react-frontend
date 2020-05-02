@@ -88,9 +88,6 @@ export class TranslatedPhraseHeader extends Component {
               options={{
                 pageSize: 5,
                 pageSizeOptions: [5, 10, 20, 50],
-                searchFieldStyle: {
-                  // fontSize: "50px",
-                },
               }}
               title="Translation history"
               columns={this.state.columns}

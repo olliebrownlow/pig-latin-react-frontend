@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import AppBarHeader from "./SharedComponents/AppBarHeader";
 import ChipButton from "./SharedComponents/ChipButton";
 import TableOfTranslations from "./DictionaryViewComponents/TableOfTranslations";
@@ -10,7 +9,7 @@ export class DictionaryView extends Component {
   state = {
     appBarEnglish: "English/Pig Latin Translations",
     appBarPigLatin: "(Englishay/Igpay Atinlay anslationstray)",
-    appBarPosition: "sticky",
+    appBarPosition: "static",
     chipLabel: "Translator",
   };
 
@@ -32,24 +31,14 @@ export class DictionaryView extends Component {
     const items = { values, componentDidMount };
     return (
       <React.Fragment>
-        <AppBarHeader
-          data-testid="appBarHeaderElement"
-          settings={appBarHeaderSettings}
-        />
+        <AppBarHeader settings={appBarHeaderSettings} />
         <Grid container justify="center">
           <Grid item xs={8}>
             <Card data-testid="cardElement">
               <br />
-              <ChipButton
-                data-testid="chipButtonElement"
-                functions={functions}
-                chipValue={chipValue}
-              />
+              <ChipButton functions={functions} chipValue={chipValue} />
               <br />
-              <TableOfTranslations
-                data-testid="tableOfTranslationsElement"
-                items={items}
-              />
+              <TableOfTranslations items={items} />
             </Card>
           </Grid>
         </Grid>

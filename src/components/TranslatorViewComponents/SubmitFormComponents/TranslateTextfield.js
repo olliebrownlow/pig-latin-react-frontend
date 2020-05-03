@@ -11,7 +11,6 @@ export class TranslateTextField extends Component {
         <Grid container justify="center">
           <Grid item xs={8}>
             <TextField
-              data-testid="textField"
               inputProps={{ "data-testid": "textToTranslate" }}
               label="Enter text"
               placeholder="e.g., risk assessment"

@@ -25,6 +25,5 @@ jobs:
             - ~/.cache
       - run: npm install -g wait-on
       - run: chmod 777 -R bin/cypress
-      - run: chmod a+x bin/cypress
       - run: bin/cypress
       - run: npm test

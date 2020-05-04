@@ -23,6 +23,6 @@ jobs:
           paths:
             - ~/.npm
             - ~/.cache
-      - run: npm install -g wait-on
-      - run: bin/cypress
+      # - run: npm install -g wait-on
+      - run: $(npm bin)/cypress run
       - run: npm test

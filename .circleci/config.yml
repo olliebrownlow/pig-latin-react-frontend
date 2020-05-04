@@ -24,6 +24,6 @@ jobs:
             - ~/.npm
             - ~/.cache
       # - run: npm install -g wait-on
-      - run: npm start http://localhost:3000
+      - run: npm start http://localhost:3000 wait-on
       - run: $(npm bin)/cypress run
       - run: npm test

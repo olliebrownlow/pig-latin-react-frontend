@@ -16,7 +16,7 @@ export class Controller extends Component {
   //Handle field changes
   handleChange = (e) => {
     this.setState({
-      ["english"]: e.target.value.toLowerCase().replace(/[^a-z\s]/gi, ""),
+      english: e.target.value.toLowerCase().replace(/[^a-z\s]/gi, ""),
     });
   };
 
@@ -88,6 +88,14 @@ export class Controller extends Component {
               values={values}
               componentDidMount={this.componentDidMount}
             />
+          </React.Fragment>
+        );
+      default:
+        return (
+          <React.Fragment>
+            <p className="defaultSwitch">
+              Oops, something has gone wrong! Please refresh your browser!
+            </p>
           </React.Fragment>
         );
     }

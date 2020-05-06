@@ -3,6 +3,10 @@ body {
   padding-bottom: 50px;
 }
 
+.defaultSwitch {
+  color: aqua;
+}
+
 .App {
   text-align: center;
 }

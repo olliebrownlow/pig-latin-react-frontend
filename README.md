@@ -18,6 +18,10 @@ The backend is available [here](https://github.com/olliebrownlow/pig-latin-rails
 
 - Ruby on Rails 6.0.0
 - React.js 16.10.1
+- Jest 24.9.0
+- React-Testing-Library 9.5.0
+- Cypress 3.1.3
+- Axios 0.19.0
 - PostgreSQL 10
 
 ### Page design

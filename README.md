@@ -32,7 +32,7 @@ Requests to the rails backend server are made using axios and interact with a Po
 
 Most state is saved to the parent component for easy access from the child components. Some more "local" state is kept in the child components - snackbar alerts and table column naming information.
 
-As a user inputs a term to translate, the term is saved to state in the parent component. On clicking "submit" (see [edge cases section](#edge-cases) for when user leaves the text field empty or uses non-letter characters), a post request is made and the response is filtered for the translation which is displayed. The input field's entry is preserved even when navigating away for a better UX.
+As a user inputs a term to translate, the term is saved to state in the parent component. On clicking "submit" (see [edge cases section](#edge-cases) for when user leaves the text field empty or uses capital or non-letter characters), a post request is made and the response is filtered for the translation which is displayed. The input field's entry is preserved, even when navigating away, for a better UX.
 
 The translation history page displays all records held in the database. PUT and DELETE requests are made from here via the action icons, and there is a button for returning to the translator page.
 
@@ -82,7 +82,7 @@ I want to be able to search through my saved terminology.
 
 - If the user leaves the TranslatorView textfield blank and clicks "submit" a snackbar message pops up asking the user to enter text.
 
-- If the user inputs any characters that are not lower-case letters, they are ignored by the `handleChange()` method with only the lower-case letters saved to state and ready for translation.
+- If the user inputs any characters that are not letters, they are ignored by the `handleChange()` method. Capitla letters are converted to lower-case and all letters are saved to state and ready for translation.
 
 ## Editing old Translations
 

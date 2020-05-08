@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Pig Latin translaor",
+  "name": "English to Pig Latin translator and Dictionary",
   "icons": [
     {
       "src": "favicon.ico",
